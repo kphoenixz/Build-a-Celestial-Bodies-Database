@@ -1,0 +1,776 @@
+        |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+| moon_id        | integer               |           | not null | nextval('moon_moon_id_seq'::regclass) |
+| name           | character varying(75) |           | not null |                                       |
+| age            | integer               |           |          |                                       |
+| diameter_in_km | numeric               |           |          |                                       |
+| mass_in_kg     | numeric               |           |          |                                       |
+| planet_id      | integer               |           |          |                                       |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+Indexes:
+    "moon_pkey" PRIMARY KEY, btree (moon_id)
+    "moon_name_key" UNIQUE CONSTRAINT, btree (name)
+Foreign-key constraints:
+    "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+Referenced by:
+    TABLE "planet" CONSTRAINT "moon_id" FOREIGN KEY (moon_id) REFERENCES moon(moon_id)
+    TABLE "relationships" CONSTRAINT "moon_id" FOREIGN KEY (moon_id) REFERENCES moon(moon_id)
+
+universe=> alter table moon alter column mass_in_kg text datatype;
+ERROR:  syntax error at or near "text"
+LINE 1: alter table moon alter column mass_in_kg text datatype;
+                                                 ^
+universe=> lter table moon alter column mass_in_kg text;
+ERROR:  syntax error at or near "lter"
+LINE 1: lter table moon alter column mass_in_kg text;
+        ^
+universe=> alter table moon alter column mass_in_kg text;
+ERROR:  syntax error at or near "text"
+LINE 1: alter table moon alter column mass_in_kg text;
+                                                 ^
+universe=> alter table moon alter column mass_in_kg type text;
+ALTER TABLE
+universe=> \d moon
+                                           Table "public.moon"
++----------------+-----------------------+-----------+----------+---------------------------------------+
+|     Column     |         Type          | Collation | Nullable |                Default                |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+| moon_id        | integer               |           | not null | nextval('moon_moon_id_seq'::regclass) |
+| name           | character varying(75) |           | not null |                                       |
+| age            | integer               |           |          |                                       |
+| diameter_in_km | numeric               |           |          |                                       |
+| mass_in_kg     | text                  |           |          |                                       |
+| planet_id      | integer               |           |          |                                       |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+Indexes:
+    "moon_pkey" PRIMARY KEY, btree (moon_id)
+    "moon_name_key" UNIQUE CONSTRAINT, btree (name)
+Foreign-key constraints:
+    "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+Referenced by:
+    TABLE "planet" CONSTRAINT "moon_id" FOREIGN KEY (moon_id) REFERENCES moon(moon_id)
+    TABLE "relationships" CONSTRAINT "moon_id" FOREIGN KEY (moon_id) REFERENCES moon(moon_id)
+
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('The Moon', 3474.2, '7.348×10^22'), ('Phobos', 22.2, '1.072×10^16'), ('Deimos', 12.4, '1.480×10^15'), ('Io', 3660, '8.932×10^22'), ('Europa', 3121, '4.800×10^22'), ('Ganymede', 5262, '1.482×10^23'), ('Callisto', 4820, '1.076×10^23);
+universe'> select * from moon;
+universe'> ^D\q
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.17 (Ubuntu 12.17-1.pgdg22.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=> \d unierse
+Did not find any relation named "unierse".
+postgres=> \c universe
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "universe" as user "freecodecamp".
+universe=> select * from moon
+universe-> select* from moon
+universe-> ;
+ERROR:  syntax error at or near "select"
+LINE 2: select* from moon
+        ^
+universe=> select * from moon;
++---------+------+-----+----------------+------------+-----------+
+| moon_id | name | age | diameter_in_km | mass_in_kg | planet_id |
++---------+------+-----+----------------+------------+-----------+
++---------+------+-----+----------------+------------+-----------+
+(0 rows)
+
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('The Moon', 3474.2, '7.348×10^22'), ('Phobos', 22.2, '1.072×10^16'), ('Deimos', 12.4, '1.480×10^15'), ('Io', 3660, '8.932×10^22'), ('Europa', 3121, '4.800×10^22'), ('Ganymede', 5262, '1.482×10^23'), ('Callisto', 4820, '1.076×10^23);
+universe'> select * from moon;
+universe'> ^D\q
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.17 (Ubuntu 12.17-1.pgdg22.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=> \c universe
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "universe" as user "freecodecamp".
+universe=> select * from moon;
++---------+------+-----+----------------+------------+-----------+
+| moon_id | name | age | diameter_in_km | mass_in_kg | planet_id |
++---------+------+-----+----------------+------------+-----------+
++---------+------+-----+----------------+------------+-----------+
+(0 rows)
+
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('The Moon', 3474.2, '7.348×10^22'), ('Phobos', 22.2, '1.072×10^16'), ('Deimos', 12.4, '1.480×10^15'), ('Io', 3660, '8.932×10^22'), ('Europa', 3121, '4.800×10^22'), ('Ganymede', 5262, '1.482×10^23'), ('Callisto', 4820, '1.076×10^23);
+universe'> ^D\q
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.17 (Ubuntu 12.17-1.pgdg22.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=> \c universe
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "universe" as user "freecodecamp".
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('The Moon', 3474.2, '7.348×10^22');
+INSERT 0 1
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('Phobos', 22.2, '1.072×10^16'), ('Deimos', 12.4, '1.480×10^15');
+INSERT 0 2
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('Io', 3660, '8.932×10^22'), ('Europa', 3121, '4.800×10^22'), ('Ganymede', 5262, '1.482×10^23'), ('Callisto', 4820, '1.076×10^23);
+universe'> ^D\q
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.17 (Ubuntu 12.17-1.pgdg22.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=> \c universe
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "universe" as user "freecodecamp".
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values ('Io', 3660, '8.932×10^22'), ('Europa', 3121, '4.800×10^22');
+INSERT 0 2
+universe=> select * from moon;
++---------+----------+-----+----------------+-------------+-----------+
+| moon_id |   name   | age | diameter_in_km | mass_in_kg  | planet_id |
++---------+----------+-----+----------------+-------------+-----------+
+|       1 | The Moon |     |         3474.2 | 7.348×10^22 |           |
+|       2 | Phobos   |     |           22.2 | 1.072×10^16 |           |
+|       3 | Deimos   |     |           12.4 | 1.480×10^15 |           |
+|       4 | Io       |     |           3660 | 8.932×10^22 |           |
+|       5 | Europa   |     |           3121 | 4.800×10^22 |           |
++---------+----------+-----+----------------+-------------+-----------+
+(5 rows)
+
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('Ganymede', 5262, '1.482×10^23'), ('Callisto', 4820, '1.076×10^23);
+universe'> ^D\q
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.17 (Ubuntu 12.17-1.pgdg22.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=> \c universe 
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "universe" as user "freecodecamp".
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('Ganymede', 5262, '1.482×10^23'), ('Callisto', 4820, '1.076×10^23');
+INSERT 0 2
+universe=> select * from moon;
++---------+----------+-----+----------------+-------------+-----------+
+| moon_id |   name   | age | diameter_in_km | mass_in_kg  | planet_id |
++---------+----------+-----+----------------+-------------+-----------+
+|       1 | The Moon |     |         3474.2 | 7.348×10^22 |           |
+|       2 | Phobos   |     |           22.2 | 1.072×10^16 |           |
+|       3 | Deimos   |     |           12.4 | 1.480×10^15 |           |
+|       4 | Io       |     |           3660 | 8.932×10^22 |           |
+|       5 | Europa   |     |           3121 | 4.800×10^22 |           |
+|       6 | Ganymede |     |           5262 | 1.482×10^23 |           |
+|       7 | Callisto |     |           4820 | 1.076×10^23 |           |
++---------+----------+-----+----------------+-------------+-----------+
+(7 rows)
+
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('Mimas', 396.4, '3.749×10^19'), ('Enceladus', 504.2, '1.080×10^20') ('Tethys', 1062, '6.170×10^20'), ('Dione', 1123, '1.123×10^21'), ('Rhea', 1527, '2.307×10^21'), ('Titan', 5151, '1.345×10^23'), ('Hyperion', 270, '5.6×10^18'), ('Iapetus', 1470, '1.806×10^21');
+ERROR:  syntax error at or near "("
+LINE 1: ....749×10^19'), ('Enceladus', 504.2, '1.080×10^20') ('Tethys',...
+                                                             ^
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('Mimas', 396.4, '3.749×10^19'), ('Enceladus', 504.2, '1.080×10^20'), ('Tethys', 1062, '6.170×10^20'), ('Dione', 1123, '1.123×10^21'), ('Rhea', 1527, '2.307×10^21'), ('Titan', 5151, '1.345×10^23'), ('Hyperion', 270, '5.6×10^18'), ('Iapetus', 1470, '1.806×10^21');
+INSERT 0 8
+universe=> select * from moon;
++---------+-----------+-----+----------------+-------------+-----------+
+| moon_id |   name    | age | diameter_in_km | mass_in_kg  | planet_id |
++---------+-----------+-----+----------------+-------------+-----------+
+|       1 | The Moon  |     |         3474.2 | 7.348×10^22 |           |
+|       2 | Phobos    |     |           22.2 | 1.072×10^16 |           |
+|       3 | Deimos    |     |           12.4 | 1.480×10^15 |           |
+|       4 | Io        |     |           3660 | 8.932×10^22 |           |
+|       5 | Europa    |     |           3121 | 4.800×10^22 |           |
+|       6 | Ganymede  |     |           5262 | 1.482×10^23 |           |
+|       7 | Callisto  |     |           4820 | 1.076×10^23 |           |
+|       8 | Mimas     |     |          396.4 | 3.749×10^19 |           |
+|       9 | Enceladus |     |          504.2 | 1.080×10^20 |           |
+|      10 | Tethys    |     |           1062 | 6.170×10^20 |           |
+|      11 | Dione     |     |           1123 | 1.123×10^21 |           |
+|      12 | Rhea      |     |           1527 | 2.307×10^21 |           |
+|      13 | Titan     |     |           5151 | 1.345×10^23 |           |
+|      14 | Hyperion  |     |            270 | 5.6×10^18   |           |
+|      15 | Iapetus   |     |           1470 | 1.806×10^21 |           |
++---------+-----------+-----+----------------+-------------+-----------+
+(15 rows)
+
+universe=> insert into moon(name, diameter_in_km, mass_in_kg) values('Miranda', 471.6, '6.590×10^19'), ('Ariel', 1158, '1.353×10^21'), ('Umbriel', 1169, '1.172×10^21'), ('Titania', 1577, '3.527×10^21'), ('Oberon', 1523, '3.014×10^21'), ('Despina', 150, '2.100×10^18'), ('Galatea', 176, '3.750×10^18'), ('Larissa', 194, '4.950×10^18'), ('Proteus', 420, '5.035×10^19'), ('Triton', 2705, '2.141×10^22'), ('Nereid', 340, '2.700×10^19'), ('Charon', 1207, '1.52×10^21'), ('Styx', null, 'unknown'), ('Nix', null, '<2x10^18'), ('Kerberos', null, 'unknown'), ('Hydra', null, '<2x10^18');
+INSERT 0 16
+universe=> select * from moon;
++---------+-----------+-----+----------------+-------------+-----------+
+| moon_id |   name    | age | diameter_in_km | mass_in_kg  | planet_id |
++---------+-----------+-----+----------------+-------------+-----------+
+|       1 | The Moon  |     |         3474.2 | 7.348×10^22 |           |
+|       2 | Phobos    |     |           22.2 | 1.072×10^16 |           |
+|       3 | Deimos    |     |           12.4 | 1.480×10^15 |           |
+|       4 | Io        |     |           3660 | 8.932×10^22 |           |
+|       5 | Europa    |     |           3121 | 4.800×10^22 |           |
+|       6 | Ganymede  |     |           5262 | 1.482×10^23 |           |
+|       7 | Callisto  |     |           4820 | 1.076×10^23 |           |
+|       8 | Mimas     |     |          396.4 | 3.749×10^19 |           |
+|       9 | Enceladus |     |          504.2 | 1.080×10^20 |           |
+|      10 | Tethys    |     |           1062 | 6.170×10^20 |           |
+|      11 | Dione     |     |           1123 | 1.123×10^21 |           |
+|      12 | Rhea      |     |           1527 | 2.307×10^21 |           |
+|      13 | Titan     |     |           5151 | 1.345×10^23 |           |
+|      14 | Hyperion  |     |            270 | 5.6×10^18   |           |
+|      15 | Iapetus   |     |           1470 | 1.806×10^21 |           |
+|      16 | Miranda   |     |          471.6 | 6.590×10^19 |           |
+|      17 | Ariel     |     |           1158 | 1.353×10^21 |           |
+|      18 | Umbriel   |     |           1169 | 1.172×10^21 |           |
+|      19 | Titania   |     |           1577 | 3.527×10^21 |           |
+|      20 | Oberon    |     |           1523 | 3.014×10^21 |           |
+|      21 | Despina   |     |            150 | 2.100×10^18 |           |
+|      22 | Galatea   |     |            176 | 3.750×10^18 |           |
+|      23 | Larissa   |     |            194 | 4.950×10^18 |           |
+|      24 | Proteus   |     |            420 | 5.035×10^19 |           |
+|      25 | Triton    |     |           2705 | 2.141×10^22 |           |
+|      26 | Nereid    |     |            340 | 2.700×10^19 |           |
+|      27 | Charon    |     |           1207 | 1.52×10^21  |           |
+|      28 | Styx      |     |                | unknown     |           |
+|      29 | Nix       |     |                | <2x10^18    |           |
+|      30 | Kerberos  |     |                | unknown     |           |
+|      31 | Hydra     |     |                | <2x10^18    |           |
++---------+-----------+-----+----------------+-------------+-----------+
+(31 rows)
+
+universe=> \d planet
+                                            Table "public.planet"
++----------------+-----------------------+-----------+----------+-------------------------------------------+
+|     Column     |         Type          | Collation | Nullable |                  Default                  |
++----------------+-----------------------+-----------+----------+-------------------------------------------+
+| planet_id      | integer               |           | not null | nextval('planet_planet_id_seq'::regclass) |
+| name           | character varying(75) |           | not null |                                           |
+| type           | text                  |           |          |                                           |
+| age            | integer               |           |          |                                           |
+| diameter_in_km | numeric               |           |          |                                           |
+| mass_in_kg     | numeric               |           |          |                                           |
+| have_moon      | boolean               |           |          |                                           |
+| moon_id        | integer               |           |          |                                           |
++----------------+-----------------------+-----------+----------+-------------------------------------------+
+Indexes:
+    "planet_pkey" PRIMARY KEY, btree (planet_id)
+    "planet_name_key" UNIQUE CONSTRAINT, btree (name)
+Foreign-key constraints:
+    "moon_id" FOREIGN KEY (moon_id) REFERENCES moon(moon_id)
+Referenced by:
+    TABLE "star" CONSTRAINT "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+    TABLE "relationships" CONSTRAINT "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+    TABLE "moon" CONSTRAINT "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+
+universe=> alter table planet rename column mass_in_kg to mass_in_10^24_kg;
+ERROR:  syntax error at or near "^"
+LINE 1: ...r table planet rename column mass_in_kg to mass_in_10^24_kg;
+                                                                ^
+universe=> alter table planet rename column mass_in_kg to mass_in_10p24_kg;
+ALTER TABLE
+universe=> alter table planet drop column moon_id;
+ALTER TABLE
+universe=> \d planet
+                                             Table "public.planet"
++------------------+-----------------------+-----------+----------+-------------------------------------------+
+|      Column      |         Type          | Collation | Nullable |                  Default                  |
++------------------+-----------------------+-----------+----------+-------------------------------------------+
+| planet_id        | integer               |           | not null | nextval('planet_planet_id_seq'::regclass) |
+| name             | character varying(75) |           | not null |                                           |
+| type             | text                  |           |          |                                           |
+| age              | integer               |           |          |                                           |
+| diameter_in_km   | numeric               |           |          |                                           |
+| mass_in_10p24_kg | numeric               |           |          |                                           |
+| have_moon        | boolean               |           |          |                                           |
++------------------+-----------------------+-----------+----------+-------------------------------------------+
+Indexes:
+    "planet_pkey" PRIMARY KEY, btree (planet_id)
+    "planet_name_key" UNIQUE CONSTRAINT, btree (name)
+Referenced by:
+    TABLE "star" CONSTRAINT "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+    TABLE "relationships" CONSTRAINT "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+    TABLE "moon" CONSTRAINT "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+
+universe=> insert into planet(name, diameter_in_km, mass_in_10p24_kg, have_moon) values('Mercury', 0.330, 4879, 'no'), ('Venus', 4.87, 12104, 'no'), ('Earth', 5.97, 12756, 'yes'), ('Mars', 0.642, 1898, 'yes'), ('Jupiter', 1989, 142984, 'yes'), (Saturn', 568, 120536, 'yes'), ('Uranus', 86.8, 51118, 'yes'), ('Neptune', 102, 49528, 'yes'), ('Pluto', 0.0130, 2376, 'yes');
+universe'> ^D\q
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.17 (Ubuntu 12.17-1.pgdg22.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=> \c universe
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "universe" as user "freecodecamp".
+universe=> insert into planet(name, diameter_in_km, mass_in_10p24_kg, have_moon) values('Mercury', 0.330, 4879, 'no'), ('Venus', 4.87, 12104, 'no'), ('Earth', 5.97, 12756, 'yes'), ('Mars', 0.642, 1898, 'yes'), ('Jupiter', 1989, 142984, 'yes'), ('Saturn', 568, 120536, 'yes'), ('Uranus', 86.8, 51118, 'yes'), ('Neptune', 102, 49528, 'yes'), ('Pluto', 0.0130, 2376, 'yes');
+INSERT 0 9
+universe=> select * from planet;
++-----------+---------+------+-----+----------------+------------------+-----------+
+| planet_id |  name   | type | age | diameter_in_km | mass_in_10p24_kg | have_moon |
++-----------+---------+------+-----+----------------+------------------+-----------+
+|         1 | Mercury |      |     |          0.330 |             4879 | f         |
+|         2 | Venus   |      |     |           4.87 |            12104 | f         |
+|         3 | Earth   |      |     |           5.97 |            12756 | t         |
+|         4 | Mars    |      |     |          0.642 |             1898 | t         |
+|         5 | Jupiter |      |     |           1989 |           142984 | t         |
+|         6 | Saturn  |      |     |            568 |           120536 | t         |
+|         7 | Uranus  |      |     |           86.8 |            51118 | t         |
+|         8 | Neptune |      |     |            102 |            49528 | t         |
+|         9 | Pluto   |      |     |         0.0130 |             2376 | t         |
++-----------+---------+------+-----+----------------+------------------+-----------+
+(9 rows)
+
+universe=> \d moon
+                                           Table "public.moon"
++----------------+-----------------------+-----------+----------+---------------------------------------+
+|     Column     |         Type          | Collation | Nullable |                Default                |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+| moon_id        | integer               |           | not null | nextval('moon_moon_id_seq'::regclass) |
+| name           | character varying(75) |           | not null |                                       |
+| age            | integer               |           |          |                                       |
+| diameter_in_km | numeric               |           |          |                                       |
+| mass_in_kg     | text                  |           |          |                                       |
+| planet_id      | integer               |           |          |                                       |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+Indexes:
+    "moon_pkey" PRIMARY KEY, btree (moon_id)
+    "moon_name_key" UNIQUE CONSTRAINT, btree (name)
+Foreign-key constraints:
+    "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+Referenced by:
+    TABLE "relationships" CONSTRAINT "moon_id" FOREIGN KEY (moon_id) REFERENCES moon(moon_id)
+
+universe=> insert into moon(planet_id) values(3) where name = "The Moon';
+universe"> ^D\q
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.17 (Ubuntu 12.17-1.pgdg22.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=> \c universe
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "universe" as user "freecodecamp".
+universe=> insert into moon(planet_id) values(3) where name = 'The Moon';
+ERROR:  syntax error at or near "where"
+LINE 1: insert into moon(planet_id) values(3) where name = 'The Moon...
+                                              ^
+universe=> update moon set planet_id = 1 where name = 'The Moon';
+UPDATE 1
+universe=> select * from moon;
++---------+-----------+-----+----------------+-------------+-----------+
+| moon_id |   name    | age | diameter_in_km | mass_in_kg  | planet_id |
++---------+-----------+-----+----------------+-------------+-----------+
+|       2 | Phobos    |     |           22.2 | 1.072×10^16 |           |
+|       3 | Deimos    |     |           12.4 | 1.480×10^15 |           |
+|       4 | Io        |     |           3660 | 8.932×10^22 |           |
+|       5 | Europa    |     |           3121 | 4.800×10^22 |           |
+|       6 | Ganymede  |     |           5262 | 1.482×10^23 |           |
+|       7 | Callisto  |     |           4820 | 1.076×10^23 |           |
+|       8 | Mimas     |     |          396.4 | 3.749×10^19 |           |
+|       9 | Enceladus |     |          504.2 | 1.080×10^20 |           |
+|      10 | Tethys    |     |           1062 | 6.170×10^20 |           |
+|      11 | Dione     |     |           1123 | 1.123×10^21 |           |
+|      12 | Rhea      |     |           1527 | 2.307×10^21 |           |
+|      13 | Titan     |     |           5151 | 1.345×10^23 |           |
+|      14 | Hyperion  |     |            270 | 5.6×10^18   |           |
+|      15 | Iapetus   |     |           1470 | 1.806×10^21 |           |
+|      16 | Miranda   |     |          471.6 | 6.590×10^19 |           |
+|      17 | Ariel     |     |           1158 | 1.353×10^21 |           |
+|      18 | Umbriel   |     |           1169 | 1.172×10^21 |           |
+|      19 | Titania   |     |           1577 | 3.527×10^21 |           |
+|      20 | Oberon    |     |           1523 | 3.014×10^21 |           |
+|      21 | Despina   |     |            150 | 2.100×10^18 |           |
+|      22 | Galatea   |     |            176 | 3.750×10^18 |           |
+|      23 | Larissa   |     |            194 | 4.950×10^18 |           |
+|      24 | Proteus   |     |            420 | 5.035×10^19 |           |
+|      25 | Triton    |     |           2705 | 2.141×10^22 |           |
+|      26 | Nereid    |     |            340 | 2.700×10^19 |           |
+|      27 | Charon    |     |           1207 | 1.52×10^21  |           |
+|      28 | Styx      |     |                | unknown     |           |
+|      29 | Nix       |     |                | <2x10^18    |           |
+|      30 | Kerberos  |     |                | unknown     |           |
+|      31 | Hydra     |     |                | <2x10^18    |           |
+|       1 | The Moon  |     |         3474.2 | 7.348×10^22 |         1 |
++---------+-----------+-----+----------------+-------------+-----------+
+(31 rows)
+
+universe=> select * from planet;
++-----------+---------+------+-----+----------------+------------------+-----------+
+| planet_id |  name   | type | age | diameter_in_km | mass_in_10p24_kg | have_moon |
++-----------+---------+------+-----+----------------+------------------+-----------+
+|         1 | Mercury |      |     |          0.330 |             4879 | f         |
+|         2 | Venus   |      |     |           4.87 |            12104 | f         |
+|         3 | Earth   |      |     |           5.97 |            12756 | t         |
+|         4 | Mars    |      |     |          0.642 |             1898 | t         |
+|         5 | Jupiter |      |     |           1989 |           142984 | t         |
+|         6 | Saturn  |      |     |            568 |           120536 | t         |
+|         7 | Uranus  |      |     |           86.8 |            51118 | t         |
+|         8 | Neptune |      |     |            102 |            49528 | t         |
+|         9 | Pluto   |      |     |         0.0130 |             2376 | t         |
++-----------+---------+------+-----+----------------+------------------+-----------+
+(9 rows)
+
+universe=> update moon set planet_id = 4 where name = 'Phobos' or name = 'Deimos';
+UPDATE 2
+universe=> update moon set planet_id = 5 where name = 'Io' or name = 'Europa' or name = 'Ganymede' or name = 'Callisto';
+UPDATE 4
+universe=> update moon set planet_id = 6 where name = 'Mimas' or name = 'Enceladus' or name = 'Tethys' or name = 'Dione' or name = 'Rhea' or name = 'Titan' or name = 'Hyperion' or name = 'Iapetus';
+UPDATE 8
+universe=> update moon set planet_id = 7 where name = 'Miranda' or name = 'Ariel' or name = 'Umbriel' or name = 'Titania' or name = 'Oberon';
+UPDATE 5
+universe=> update moon set planet_id = 8 where name = 'Despina' or name = 'Galatea' or name = 'Larissa' or name = 'Proteus' or name = 'Triton' or name = 'Nereid';
+UPDATE 6
+universe=> update moon set planet_id = 9 where name = 'Charon' or name = 'Styx' or name = 'Nix' or name = 'Kerberos' or name = 'Hydra';
+UPDATE 5
+universe=> select * from moon;
++---------+-----------+-----+----------------+-------------+-----------+
+| moon_id |   name    | age | diameter_in_km | mass_in_kg  | planet_id |
++---------+-----------+-----+----------------+-------------+-----------+
+|       1 | The Moon  |     |         3474.2 | 7.348×10^22 |         1 |
+|       2 | Phobos    |     |           22.2 | 1.072×10^16 |         4 |
+|       3 | Deimos    |     |           12.4 | 1.480×10^15 |         4 |
+|       4 | Io        |     |           3660 | 8.932×10^22 |         5 |
+|       5 | Europa    |     |           3121 | 4.800×10^22 |         5 |
+|       6 | Ganymede  |     |           5262 | 1.482×10^23 |         5 |
+|       7 | Callisto  |     |           4820 | 1.076×10^23 |         5 |
+|       8 | Mimas     |     |          396.4 | 3.749×10^19 |         6 |
+|       9 | Enceladus |     |          504.2 | 1.080×10^20 |         6 |
+|      10 | Tethys    |     |           1062 | 6.170×10^20 |         6 |
+|      11 | Dione     |     |           1123 | 1.123×10^21 |         6 |
+|      12 | Rhea      |     |           1527 | 2.307×10^21 |         6 |
+|      13 | Titan     |     |           5151 | 1.345×10^23 |         6 |
+|      14 | Hyperion  |     |            270 | 5.6×10^18   |         6 |
+|      15 | Iapetus   |     |           1470 | 1.806×10^21 |         6 |
+|      16 | Miranda   |     |          471.6 | 6.590×10^19 |         7 |
+|      17 | Ariel     |     |           1158 | 1.353×10^21 |         7 |
+|      18 | Umbriel   |     |           1169 | 1.172×10^21 |         7 |
+|      19 | Titania   |     |           1577 | 3.527×10^21 |         7 |
+|      20 | Oberon    |     |           1523 | 3.014×10^21 |         7 |
+|      21 | Despina   |     |            150 | 2.100×10^18 |         8 |
+|      22 | Galatea   |     |            176 | 3.750×10^18 |         8 |
+|      23 | Larissa   |     |            194 | 4.950×10^18 |         8 |
+|      24 | Proteus   |     |            420 | 5.035×10^19 |         8 |
+|      25 | Triton    |     |           2705 | 2.141×10^22 |         8 |
+|      26 | Nereid    |     |            340 | 2.700×10^19 |         8 |
+|      27 | Charon    |     |           1207 | 1.52×10^21  |         9 |
+|      28 | Styx      |     |                | unknown     |         9 |
+|      29 | Nix       |     |                | <2x10^18    |         9 |
+|      30 | Kerberos  |     |                | unknown     |         9 |
+|      31 | Hydra     |     |                | <2x10^18    |         9 |
++---------+-----------+-----+----------------+-------------+-----------+
+(31 rows)
+
+universe=> insert into planet(name, diameter_in_km, mass_in_10p24_kg) values('Kepler-78b', 15290.4, 10.2), ('TOI-733 b', null, 34.2), ('WASP-193b', 209720, 264.4), ('WASP-121 b', 267000, null), ('WASP-12 b', 262400, 2637);
+INSERT 0 5
+universe=> \d star
+                                           Table "public.star"
++----------------+-----------------------+-----------+----------+---------------------------------------+
+|     Column     |         Type          | Collation | Nullable |                Default                |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+| star_id        | integer               |           | not null | nextval('star_star_id_seq'::regclass) |
+| name           | character varying(75) |           | not null |                                       |
+| type           | text                  |           |          |                                       |
+| age            | integer               |           |          |                                       |
+| still_alive    | boolean               |           |          |                                       |
+| diameter_in_km | numeric               |           |          |                                       |
+| mass_in_kg     | numeric               |           |          |                                       |
+| planet_id      | integer               |           |          |                                       |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+Indexes:
+    "star_pkey" PRIMARY KEY, btree (star_id)
+    "star_name_key" UNIQUE CONSTRAINT, btree (name)
+Foreign-key constraints:
+    "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+Referenced by:
+    TABLE "galaxy" CONSTRAINT "star_id" FOREIGN KEY (star_id) REFERENCES star(star_id)
+    TABLE "relationships" CONSTRAINT "star_id" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+universe=> alter table star drop column planet_id;
+ALTER TABLE
+universe=> \d star
+                                           Table "public.star"
++----------------+-----------------------+-----------+----------+---------------------------------------+
+|     Column     |         Type          | Collation | Nullable |                Default                |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+| star_id        | integer               |           | not null | nextval('star_star_id_seq'::regclass) |
+| name           | character varying(75) |           | not null |                                       |
+| type           | text                  |           |          |                                       |
+| age            | integer               |           |          |                                       |
+| still_alive    | boolean               |           |          |                                       |
+| diameter_in_km | numeric               |           |          |                                       |
+| mass_in_kg     | numeric               |           |          |                                       |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+Indexes:
+    "star_pkey" PRIMARY KEY, btree (star_id)
+    "star_name_key" UNIQUE CONSTRAINT, btree (name)
+Referenced by:
+    TABLE "galaxy" CONSTRAINT "star_id" FOREIGN KEY (star_id) REFERENCES star(star_id)
+    TABLE "relationships" CONSTRAINT "star_id" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+universe=> alter table star rename column mass_in_km to distance_in_ly;
+ERROR:  column "mass_in_km" does not exist
+universe=> alter table star rename column mass_in_kg to distance_in_ly;
+ALTER TABLE
+universe=> \d star
+                                           Table "public.star"
++----------------+-----------------------+-----------+----------+---------------------------------------+
+|     Column     |         Type          | Collation | Nullable |                Default                |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+| star_id        | integer               |           | not null | nextval('star_star_id_seq'::regclass) |
+| name           | character varying(75) |           | not null |                                       |
+| type           | text                  |           |          |                                       |
+| age            | integer               |           |          |                                       |
+| still_alive    | boolean               |           |          |                                       |
+| diameter_in_km | numeric               |           |          |                                       |
+| distance_in_ly | numeric               |           |          |                                       |
++----------------+-----------------------+-----------+----------+---------------------------------------+
+Indexes:
+    "star_pkey" PRIMARY KEY, btree (star_id)
+    "star_name_key" UNIQUE CONSTRAINT, btree (name)
+Referenced by:
+    TABLE "galaxy" CONSTRAINT "star_id" FOREIGN KEY (star_id) REFERENCES star(star_id)
+    TABLE "relationships" CONSTRAINT "star_id" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+universe=> alter table star rename column diameter_in_km to radius_compared_to_Sun;
+ALTER TABLE
+universe=> alter table star rename column radius_compared_to_Sun to solar_mass_in_2x10p30;
+ALTER TABLE
+universe=> insert into star(name, solar_mass_in_2x10p30, distance_in_ly) values('Sun', 1, 0.0000158), ('Proxima Centauri', 0.122, 4.2465), ('Rigil Kentaurus', 1.079, 4.3441), ('Toliman', 0.909, 4.3441), ('Barnard's Star', 0.144, 5.9629), ('Luhman 16 A', 0.032, 6.5029), ('Luhman 16 B', 0.027, 6.5029);
+universe'> ^D\q
+camper: /project$ psql --username=freecodecamp --dbname=postgres
+Border style is 2.
+Pager usage is off.
+psql (12.17 (Ubuntu 12.17-1.pgdg22.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=> \c universe
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+You are now connected to database "universe" as user "freecodecamp".
+universe=> insert into star(name, solar_mass_in_2x10p30, distance_in_ly) values('Sun', 1, 0.0000158), ('Proxima Centauri', 0.122, 4.2465), ('Rigil Kentaurus', 1.079, 4.3441), ('Toliman', 0.909, 4.3441), ('Barnards Star', 0.144, 5.9629), ('Luhman 16 A', 0.032, 6.5029), ('Luhman 16 B', 0.027, 6.5029);
+INSERT 0 7
+universe=> select * from planet;
++-----------+------------+------+-----+----------------+------------------+-----------+
+| planet_id |    name    | type | age | diameter_in_km | mass_in_10p24_kg | have_moon |
++-----------+------------+------+-----+----------------+------------------+-----------+
+|         1 | Mercury    |      |     |          0.330 |             4879 | f         |
+|         2 | Venus      |      |     |           4.87 |            12104 | f         |
+|         3 | Earth      |      |     |           5.97 |            12756 | t         |
+|         4 | Mars       |      |     |          0.642 |             1898 | t         |
+|         5 | Jupiter    |      |     |           1989 |           142984 | t         |
+|         6 | Saturn     |      |     |            568 |           120536 | t         |
+|         7 | Uranus     |      |     |           86.8 |            51118 | t         |
+|         8 | Neptune    |      |     |            102 |            49528 | t         |
+|         9 | Pluto      |      |     |         0.0130 |             2376 | t         |
+|        10 | Kepler-78b |      |     |        15290.4 |             10.2 |           |
+|        11 | TOI-733 b  |      |     |                |             34.2 |           |
+|        12 | WASP-193b  |      |     |         209720 |            264.4 |           |
+|        13 | WASP-121 b |      |     |         267000 |                  |           |
+|        14 | WASP-12 b  |      |     |         262400 |             2637 |           |
++-----------+------------+------+-----+----------------+------------------+-----------+
+(14 rows)
+
+universe=> alter table planet add column star_id;
+ERROR:  syntax error at or near ";"
+LINE 1: alter table planet add column star_id;
+                                             ^
+universe=> alter tanle planet add column star_id int;
+ERROR:  syntax error at or near "tanle"
+LINE 1: alter tanle planet add column star_id int;
+              ^
+universe=> alter table planet add column star_id int;
+ALTER TABLE
+universe=> alter table planet add constraint star_id foreign key(star_id) references star(star_id);
+ALTER TABLE
+universe=> select * from planet 
+universe-> ;
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+| planet_id |    name    | type | age | diameter_in_km | mass_in_10p24_kg | have_moon | star_id |
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+|         1 | Mercury    |      |     |          0.330 |             4879 | f         |         |
+|         2 | Venus      |      |     |           4.87 |            12104 | f         |         |
+|         3 | Earth      |      |     |           5.97 |            12756 | t         |         |
+|         4 | Mars       |      |     |          0.642 |             1898 | t         |         |
+|         5 | Jupiter    |      |     |           1989 |           142984 | t         |         |
+|         6 | Saturn     |      |     |            568 |           120536 | t         |         |
+|         7 | Uranus     |      |     |           86.8 |            51118 | t         |         |
+|         8 | Neptune    |      |     |            102 |            49528 | t         |         |
+|         9 | Pluto      |      |     |         0.0130 |             2376 | t         |         |
+|        10 | Kepler-78b |      |     |        15290.4 |             10.2 |           |         |
+|        11 | TOI-733 b  |      |     |                |             34.2 |           |         |
+|        12 | WASP-193b  |      |     |         209720 |            264.4 |           |         |
+|        13 | WASP-121 b |      |     |         267000 |                  |           |         |
+|        14 | WASP-12 b  |      |     |         262400 |             2637 |           |         |
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+(14 rows)
+
+universe=> select * from star;
++---------+------------------+------+-----+-------------+-----------------------+----------------+
+| star_id |       name       | type | age | still_alive | solar_mass_in_2x10p30 | distance_in_ly |
++---------+------------------+------+-----+-------------+-----------------------+----------------+
+|       1 | Sun              |      |     |             |                     1 |      0.0000158 |
+|       2 | Proxima Centauri |      |     |             |                 0.122 |         4.2465 |
+|       3 | Rigil Kentaurus  |      |     |             |                 1.079 |         4.3441 |
+|       4 | Toliman          |      |     |             |                 0.909 |         4.3441 |
+|       5 | Barnards Star    |      |     |             |                 0.144 |         5.9629 |
+|       6 | Luhman 16 A      |      |     |             |                 0.032 |         6.5029 |
+|       7 | Luhman 16 B      |      |     |             |                 0.027 |         6.5029 |
++---------+------------------+------+-----+-------------+-----------------------+----------------+
+(7 rows)
+
+universe=> update planet set star_id = 1 where planet_id = 1 or planet_id = 2 or planet_id = 3 or planet_id = 4 or planet_id = 5 or planet_id = 6 or planet_id = 7 or planet_id = 8 or planet_id = 9;
+UPDATE 9
+universe=> select * from palnet
+universe-> ;
+ERROR:  relation "palnet" does not exist
+LINE 1: select * from palnet
+                      ^
+universe=> select * from planet;
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+| planet_id |    name    | type | age | diameter_in_km | mass_in_10p24_kg | have_moon | star_id |
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+|        10 | Kepler-78b |      |     |        15290.4 |             10.2 |           |         |
+|        11 | TOI-733 b  |      |     |                |             34.2 |           |         |
+|        12 | WASP-193b  |      |     |         209720 |            264.4 |           |         |
+|        13 | WASP-121 b |      |     |         267000 |                  |           |         |
+|        14 | WASP-12 b  |      |     |         262400 |             2637 |           |         |
+|         1 | Mercury    |      |     |          0.330 |             4879 | f         |       1 |
+|         2 | Venus      |      |     |           4.87 |            12104 | f         |       1 |
+|         3 | Earth      |      |     |           5.97 |            12756 | t         |       1 |
+|         4 | Mars       |      |     |          0.642 |             1898 | t         |       1 |
+|         5 | Jupiter    |      |     |           1989 |           142984 | t         |       1 |
+|         6 | Saturn     |      |     |            568 |           120536 | t         |       1 |
+|         7 | Uranus     |      |     |           86.8 |            51118 | t         |       1 |
+|         8 | Neptune    |      |     |            102 |            49528 | t         |       1 |
+|         9 | Pluto      |      |     |         0.0130 |             2376 | t         |       1 |
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+(14 rows)
+
+universe=> insert into star(name, solar_mass_in_2x10p30, distance_in_ly) values('Kepler-78', 1.68, 407.3);
+INSERT 0 1
+universe=> update planet set star_id = 8 where planet_id = 10;
+UPDATE 1
+universe=> insert into star(name, solar_mass_in_2x10p30, distance_in_ly) values('TOI 733', 0.956, 245.512
+universe(> );
+INSERT 0 1
+universe=> update planet set star_id = 9 where planet_id = 11;
+UPDATE 1
+universe=> insert into star(name, solar_mass_in_2x10p30, distance_in_ly) values('WASP-193', 1.059, 1180.9696);
+INSERT 0 1
+universe=> update planet star_id = 10 where planet_id = 12;
+ERROR:  syntax error at or near "="
+LINE 1: update planet star_id = 10 where planet_id = 12;
+                              ^
+universe=> update planet star_id = 10 where planet_id = 12;
+ERROR:  syntax error at or near "="
+LINE 1: update planet star_id = 10 where planet_id = 12;
+                              ^
+universe=> update planet set star_id = 10 where planet_id = 12;
+UPDATE 1
+universe=> delete from planet where planet_id = 13;
+DELETE 1
+universe=> delete from planet where planet_id = 13;
+DELETE 0
+universe=> delete from planet where planet_id = 14;
+DELETE 1
+universe=> select * from planet;
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+| planet_id |    name    | type | age | diameter_in_km | mass_in_10p24_kg | have_moon | star_id |
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+|         1 | Mercury    |      |     |          0.330 |             4879 | f         |       1 |
+|         2 | Venus      |      |     |           4.87 |            12104 | f         |       1 |
+|         3 | Earth      |      |     |           5.97 |            12756 | t         |       1 |
+|         4 | Mars       |      |     |          0.642 |             1898 | t         |       1 |
+|         5 | Jupiter    |      |     |           1989 |           142984 | t         |       1 |
+|         6 | Saturn     |      |     |            568 |           120536 | t         |       1 |
+|         7 | Uranus     |      |     |           86.8 |            51118 | t         |       1 |
+|         8 | Neptune    |      |     |            102 |            49528 | t         |       1 |
+|         9 | Pluto      |      |     |         0.0130 |             2376 | t         |       1 |
+|        10 | Kepler-78b |      |     |        15290.4 |             10.2 |           |       8 |
+|        11 | TOI-733 b  |      |     |                |             34.2 |           |       9 |
+|        12 | WASP-193b  |      |     |         209720 |            264.4 |           |      10 |
++-----------+------------+------+-----+----------------+------------------+-----------+---------+
+(12 rows)
+
+universe=> alter table star add column galaxy_id;
+ERROR:  syntax error at or near ";"
+LINE 1: alter table star add column galaxy_id;
+                                             ^
+universe=> alter table star add column galaxy_id int;
+ALTER TABLE
+universe=> alter table star add constraint galaxy_id foreign key(galaxy_id) references galaxy(galaxy_id);
+ALTER TABLE
+universe=> \d galaxy
+                                            Table "public.galaxy"
++----------------+-----------------------+-----------+----------+-------------------------------------------+
+|     Column     |         Type          | Collation | Nullable |                  Default                  |
++----------------+-----------------------+-----------+----------+-------------------------------------------+
+| galaxy_id      | integer               |           | not null | nextval('galaxy_galaxy_id_seq'::regclass) |
+| name           | character varying(75) |           | not null |                                           |
+| type           | text                  |           |          |                                           |
+| age            | integer               |           |          |                                           |
+| distance_in_ly | numeric               |           |          |                                           |
+| star_id        | integer               |           |          |                                           |
++----------------+-----------------------+-----------+----------+-------------------------------------------+
+Indexes:
+    "galaxy_pkey" PRIMARY KEY, btree (galaxy_id)
+    "galaxy_name_key" UNIQUE CONSTRAINT, btree (name)
+Foreign-key constraints:
+    "star_id" FOREIGN KEY (star_id) REFERENCES star(star_id)
+Referenced by:
+    TABLE "relationships" CONSTRAINT "galaxy_id" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+    TABLE "star" CONSTRAINT "galaxy_id" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+
+universe=> alter table galaxy drop column star_id;
+ALTER TABLE
+universe=> select * from star;
++---------+------------------+------+-----+-------------+-----------------------+----------------+-----------+
+| star_id |       name       | type | age | still_alive | solar_mass_in_2x10p30 | distance_in_ly | galaxy_id |
++---------+------------------+------+-----+-------------+-----------------------+----------------+-----------+
+|       1 | Sun              |      |     |             |                     1 |      0.0000158 |           |
+|       2 | Proxima Centauri |      |     |             |                 0.122 |         4.2465 |           |
+|       3 | Rigil Kentaurus  |      |     |             |                 1.079 |         4.3441 |           |
+|       4 | Toliman          |      |     |             |                 0.909 |         4.3441 |           |
+|       5 | Barnards Star    |      |     |             |                 0.144 |         5.9629 |           |
+|       6 | Luhman 16 A      |      |     |             |                 0.032 |         6.5029 |           |
+|       7 | Luhman 16 B      |      |     |             |                 0.027 |         6.5029 |           |
+|       8 | Kepler-78        |      |     |             |                  1.68 |          407.3 |           |
+|       9 | TOI 733          |      |     |             |                 0.956 |        245.512 |           |
+|      10 | WASP-193         |      |     |             |                 1.059 |      1180.9696 |           |
++---------+------------------+------+-----+-------------+-----------------------+----------------+-----------+
+(10 rows)
+
+universe=> insert into galaxy(name, distance_in_ly) values('Milky Way', 0), ('Canis Major dwarf', 25000), ('Segue 1', 75000), ('Sagittarius Dwarf Elliptical', 75500), ('Large Magellanic Cloud', 161500), ('Small Magellanic Cloud', 200000);
+INSERT 0 6
+universe=> update star set galaxy_id - 1 where star_id = 1 or star_id = 2 or star_id = 3 or star_id = 4 or star_id = 5 or star_id = 6 or star_id = 7 or star_id = 8 or star_id = 9 or star_id = 10;
+ERROR:  syntax error at or near "-"
+LINE 1: update star set galaxy_id - 1 where star_id = 1 or star_id =...
+                                  ^
+universe=> update star set galaxy_id = 1 where star_id = 1 or star_id = 2 or star_id = 3 or star_id = 4 or star_id = 5 or star_id = 6 or star_id = 7 or star_id = 8 or star_id = 9 or star_id = 10;
+UPDATE 10
+universe=> \d relationships
+                                                Table "public.relationships"
++------------------+-----------------------+-----------+----------+--------------------------------------------------------+
+|      Column      |         Type          | Collation | Nullable |                        Default                         |
++------------------+-----------------------+-----------+----------+--------------------------------------------------------+
+| relationships_id | integer               |           | not null | nextval('relationships_relationship_id_seq'::regclass) |
+| name             | character varying(75) |           | not null |                                                        |
+| galaxy_id        | integer               |           | not null |                                                        |
+| star_id          | integer               |           |          |                                                        |
+| planet_id        | integer               |           |          |                                                        |
+| moon_id          | integer               |           |          |                                                        |
++------------------+-----------------------+-----------+----------+--------------------------------------------------------+
+Indexes:
+    "relationships_pkey" PRIMARY KEY, btree (relationships_id)
+    "relationships_name_key" UNIQUE CONSTRAINT, btree (name)
+Foreign-key constraints:
+    "galaxy_id" FOREIGN KEY (galaxy_id) REFERENCES galaxy(galaxy_id)
+    "moon_id" FOREIGN KEY (moon_id) REFERENCES moon(moon_id)
+    "planet_id" FOREIGN KEY (planet_id) REFERENCES planet(planet_id)
+    "star_id" FOREIGN KEY (star_id) REFERENCES star(star_id)
+
+universe=> insert into relationships(name, galaxy_id) values('Mercury', 1), ('Venus', 1), ('Earth', 1);
+INSERT 0 3
+universe=> 
